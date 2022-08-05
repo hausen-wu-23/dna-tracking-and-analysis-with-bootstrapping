@@ -74,6 +74,10 @@ for file_n in file_l:
 	tp.quiet(suppress=False)
 	f = tp.batch(frames[:], par_d, minmass=min_mass, invert=inv, processes=1)
 
+	plt.figure()
+	tp.plot_density_profile(f, 10)
+	plt.savefig(work_dir + "outputden%s.png" % (file_dir.split('/')[-1]))
+
 	# link the paths
 	t = tp.link_df(f, 7, memory=10)
 
@@ -99,6 +103,12 @@ for file_n in file_l:
 	plt.legend()
 	plt.savefig(work_dir + "output%s.png" % (file_dir.split('/')[-1]))
 	em1.to_csv(work_dir + 'emsd%s.csv'%(file_dir.split('/')[-1]), mode='w')
+
+	plt.figure()
+	ax = plt.gca() 
+	ax.set_aspect(1) 
+	tp.plot_traj(t)
+	plt.savefig(work_dir + "outputtraj%s.png" % (file_dir.split('/')[-1]))
     
 ###################################################################################
 #                                  bootstrapping                                  #
